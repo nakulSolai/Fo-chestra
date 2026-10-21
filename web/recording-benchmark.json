@@ -1,0 +1,10 @@
+{
+  "measuredAt": "2026-10-19T05:00:22.418Z",
+  "source": "controlled local browser fixtures and simulated Fo waits",
+  "rows": [
+    { "repetition": 1, "sequentialMs": 17418, "parallelMs": 11936 },
+    { "repetition": 2, "sequentialMs": 19107, "parallelMs": 11874 },
+    { "repetition": 3, "sequentialMs": 33913, "parallelMs": 38310 }
+  ],
+  "provenance": ".data/validation/benchmark.json; six completed sandbox runs; snapshot for recording"
+}

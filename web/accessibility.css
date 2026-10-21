@@ -1,0 +1,2 @@
+.skip-link{position:fixed;left:16px;top:-70px;z-index:200;background:#c8b2f0;color:#211832;padding:12px 18px;border-radius:6px;font-size:14px;transition:top .1s}.skip-link:focus{top:14px}
+.verification-failed .recorded-verification>strong{color:#e3bd7a}

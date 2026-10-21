@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.cache/
+.data/
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+coverage/
+*.log
+*.tsbuildinfo
+.vscode/
+/demo-recordings/
+foreign_artifacts/
+recordings/
+.DS_Store
+Thumbs.db
+# Organizer-provided reference retained locally; redistribution is not established.
+/fo-mcp-hackathon.md

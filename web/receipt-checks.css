@@ -1,0 +1,20 @@
+.verification-partial .recorded-verification>strong,
+.verification-uncertain .recorded-verification>strong{color:#e3bd7a}
+.recorded-verification>.receipt-checks{display:block;border:1px solid #363d48;border-radius:6px;background:#151a21;padding:15px 16px;margin-top:17px;max-width:760px}
+.receipt-checks>h3{font-size:11px;font-weight:500;color:#c7c8d2;margin-bottom:7px}
+.receipt-checks>p{font-size:10px;line-height:1.8;color:#8994a6;margin-bottom:12px}
+.receipt-checks>ul{padding:0;margin:0;list-style:none}
+.receipt-checks li{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0;border-top:1px solid #2d3440;font-size:10px;line-height:1.6}
+.receipt-checks li>span{display:flex;align-items:center;gap:8px;color:#aeb7c7}
+.receipt-checks li>strong{font-size:9px;font-weight:500;flex-shrink:0}
+.receipt-check-pass>span>svg,.receipt-check-pass>strong{color:#88c7b0}
+.receipt-check-fail>span>svg,.receipt-check-fail>strong{color:#e3bd7a}
+.verification-form>.verification-uncertain-note{font-size:10px;line-height:1.8;color:#c9ad83}
+@media(min-width:1800px){.receipt-checks>h3{font-size:13px}.receipt-checks>p,.receipt-checks li{font-size:12px}.receipt-checks li>strong{font-size:11px}}
+@media(max-width:650px){.recorded-verification>.receipt-checks{padding:13px}.receipt-checks li{gap:9px;font-size:9px}.receipt-checks li>span{gap:6px}.receipt-checks li>strong{font-size:8px}}
+.uncertainty-context {
+  margin: 9px 0 0;
+  color: #949ca9;
+  font-size: 10px;
+  line-height: 1.8;
+}

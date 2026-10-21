@@ -1,0 +1,20 @@
+export type RunMode = 'sandbox' | 'live';
+export type Strategy = 'parallel' | 'sequential';
+export type RunStatus = 'planning' | 'researching' | 'awaiting_approval' | 'working' | 'awaiting_input' | 'completed' | 'partial' | 'failed' | 'cancelled' | 'interrupted';
+export type WorkerStatus = 'queued' | 'running' | 'ready' | 'failed' | 'cancelled';
+export interface WorkItem { id: string; title: string; url: string; objective: string; dependsOn: string[]; speculative?: boolean }
+export interface Evidence { id: string; workerId: string; title: string; url: string; text: string; capturedAt: string; source: 'browser' | 'fixture' | 'fo' | 'model' | 'manual'; verified: boolean }
+export interface PreparedAction { id: string; runId: string; target: string; operation: 'email' | 'call' | 'inquiry'; message: string; maxSpendCents: number; fingerprint: string; status: 'pending' | 'approved' | 'rejected' | 'dispatching' | 'working' | 'complete' | 'failed' | 'outcome_unknown'; createdAt: string; conversationId?: string; response?: string }
+export interface Plan { summary: string; workItems: WorkItem[]; proposedAction?: { target: string; operation: 'email' | 'call' | 'inquiry'; message: string; maxSpendCents: number }; uncertainties: string[] }
+export interface Decision { summary: string; recommendedWorkerId?: string; rationale: string; alternatives: { workerId: string; reason: string }[]; missingInformation: string[] }
+export interface Worker { id: string; title: string; url: string; objective: string; status: WorkerStatus; speculative: boolean; startedAt?: string; finishedAt?: string; elapsedMs?: number; screenshot?: string; evidence: Evidence[]; error?: string }
+export interface RunEvent { id: number; at: string; type: string; message: string; workerId?: string; detail?: unknown }
+export interface Usage { model: string; requests: number; inputTokens: number; outputTokens: number; latencyMs: number; retries: number; estimatedCostUsd: number | null }
+export interface FoState { status: 'idle' | 'working' | 'awaiting_input' | 'complete' | 'failed' | 'outcome_unknown'; progress?: string; response?: string; elapsedSeconds?: number; conversationId?: string; simulated: boolean }
+export interface EmailChecks { deliveryObserved: boolean; recipientMatches: boolean; subjectMatches: boolean; bodyMatches: boolean; noAttachments: boolean; plainTextOnly: boolean }
+export interface Verification { status: 'verified' | 'partial' | 'uncertain'; method: 'human_receipt' | 'operator_gmail_receipt'; checks?: EmailChecks; note: string; reference: string; recordedAt: string }
+export interface Run { id: string; goal: string; mode: RunMode; strategy: Strategy; status: RunStatus; workerLimit?: number; createdAt: string; updatedAt: string; finishedAt?: string; plan?: Plan; decision?: Decision; workers: Worker[]; events: RunEvent[]; action?: PreparedAction; fo: FoState; usage: Usage[]; summary?: string; uncertainties: string[]; verification?: Verification; metrics: { elapsedMs: number; browserActiveMs: number; foWaitMs: number; overlapMs: number; maxConcurrentWorkers: number }; error?: string }
+export interface RunRequest { goal: string; mode: RunMode; strategy?: Strategy; urls?: string[]; scenario?: 'comparison' | 'appointments'; maxWorkers?: number; prepareAction?: boolean }
+export interface Readiness { browser: { ready: boolean; executable?: string; message: string }; anthropic: { configured: boolean; model: string; verified: boolean }; fo: { configured: boolean; connected: boolean; auth: string; message: string; tools: string[] }; versions: Record<string,string>; maxWorkers: number }
+export interface FoReply { status: 'working' | 'complete' | 'failed'; conversationId: string; response?: string; progress?: string; elapsedSeconds?: number }
+export interface FoClient { discover(): Promise<{ connected: boolean; tools: string[]; message: string }>; submit(message: string): Promise<FoReply>; poll(conversationId: string, waitSeconds?: number): Promise<FoReply>; answer(conversationId: string, message: string): Promise<FoReply>; close(): Promise<void> }
